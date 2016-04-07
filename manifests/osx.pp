@@ -8,7 +8,7 @@ class akiellor::osx {
   }
 
   class { 'osx::global::key_repeat_delay':
-    delay => 0
+    delay => 10
   }
 
   include osx::keyboard::capslock_to_control

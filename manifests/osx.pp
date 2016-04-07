@@ -11,6 +11,10 @@ class akiellor::osx {
     delay => 10
   }
 
+  class { 'osx::dock::icon_size':
+    size => 72
+  }
+
   include osx::keyboard::capslock_to_control
 
   boxen::osx_defaults { 'Make function keys do real things, and not apple things':

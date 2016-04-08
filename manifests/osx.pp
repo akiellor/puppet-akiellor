@@ -8,11 +8,11 @@ class akiellor::osx {
   }
 
   class { 'osx::global::key_repeat_delay':
-    delay => 10
+    delay => 20
   }
 
   class { 'osx::dock::icon_size':
-    size => 72
+    size => 24
   }
 
   include osx::keyboard::capslock_to_control

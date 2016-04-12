@@ -1,4 +1,6 @@
 class akiellor::osx {
+  include akiellor::ulimit
+
   class { 'osx::dock::position':
     position => 'right'
   }

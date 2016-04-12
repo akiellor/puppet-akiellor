@@ -4,7 +4,7 @@
 <plist version="1.0">
   <dict>
     <key>Label</key>
-    <string>limit.maxfiles</string>
+    <string>dev.ulimit</string>
     <key>ProgramArguments</key>
     <array>
       <string>launchctl</string>

@@ -1,6 +1,11 @@
 class akiellor::ulimit {
-  file { '/Library/LaunchDaemons/limit.maxfiles.plist':
+  file { '/Library/LaunchDaemons/dev.ulimit.plist':
     ensure => present,
-    source => "puppet:///modules/akiellor/limit.maxfiles.plist",
+    owner  => "root",
+    source => "puppet:///modules/akiellor/dev.ulimit.plist",
+  }
+
+  service { 'ulimit':
+    enable => true
   }
 }

@@ -1,12 +1,24 @@
 class akiellor::dns {
   include dnsmasq
 
-  file { '/etc/resolver/docker':
+  file { ['/etc/resolver/docker',
+          '/etc/resolver/local',
+          "${dnsmasq::searchdir}/docker.conf",
+          '/Library/LaunchDaemons/dev.docker-dns.plist']:
+    ensure => absent
+  }
+
+
+  file { '/Library/LaunchDaemons/dev.dockerdns.plist':
     ensure => present,
-    content => "nameserver 127.0.0.1"
+    owner  => "root",
+    source => "puppet:///modules/akiellor/dev.docker-dns.plist",
+  } -> service { 'dev.dockerdns':
+    ensure => running,
+    enable => true
   }
 
   boxen::env_script { 're-dns':
-    content => "alias re-dns='echo \"address=/docker/$(docker-machine ip default)\" | sudo tee ${dnsmasq::searchdir}/docker.conf && sudo launchctl stop dev.dnsmasq && sudo launchctl start dev.dnsmasq\'"
+    content => "alias re-dns='sudo launchctl stop dev.dockerdns && sudo launchctl start dev.dockerdns\'"
   }
 }
